@@ -1,4 +1,5 @@
 import { Star, PaperPlaneTilt, XCircle } from "phosphor-react";
+import { StarsAvaliation } from "../Stars";
 
 export function Avaliation({ stateModal }: any) {
   return (
@@ -17,6 +18,7 @@ export function Avaliation({ stateModal }: any) {
         <main className="w-11/12 overflow-y-auto space-y-2">
           <ul className="w-full p-2 flex flex-col bg-zinc-300 rounded-lg">
             <li className="font-semibold">Atitude Empreendedora:</li>
+            <StarsAvaliation />
             <Star size={24} weight="bold" color="#000000" />
           </ul>
           <ul className="w-full p-2 flex flex-col bg-zinc-300 rounded-lg">

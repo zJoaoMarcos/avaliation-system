@@ -1,6 +1,6 @@
 import { MagnifyingGlass, CheckCircle, Star } from "phosphor-react";
 import { useState } from "react";
-import { Avaliation } from "../../components/modal/index";
+import { Avaliation } from "../../components/Modal/index";
 
 export function Home() {
   const [Modal, setModal] = useState(false);
