@@ -1,13 +1,10 @@
+import * as Dialog from "@radix-ui/react-dialog";
 import { MagnifyingGlass, CheckCircle, Star } from "phosphor-react";
-import { useState } from "react";
-import { Avaliation } from "../../components/Modal/index";
+import { RatingModal } from "../../components/Modal";
 
 export function Home() {
-  const [Modal, setModal] = useState(false);
-
   return (
     <div className="w-screen h-screen flex flex-col items-center px-72 bg-zinc-500">
-      {Modal && <Avaliation stateModal={setModal} />}
       <header className="w-full flex flex-row mt-14 mb-5">
         <h2 className="pl-6 text-5xl font-black text-white text-start">
           Funcionários
@@ -39,13 +36,13 @@ export function Home() {
               Tecnologia da Informação
             </td>
             <td>
-              <button
-                onClick={() => setModal(true)}
-                className="w-36 py-1 px-4 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md flex flex-row space-x-3 items-center justify-start"
-              >
-                <Star size={28} weight="fill" color="#FFFF00" />
-                <p>Avaliar</p>
-              </button>
+              <Dialog.Root>
+                <Dialog.DialogTrigger className="w-36 py-1 px-5 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md gap-2 flex flex-row items-center justify-start">
+                  <Star size={28} weight="fill" color="#FFFF00" />
+                  Avaliar
+                  <RatingModal />
+                </Dialog.DialogTrigger>
+              </Dialog.Root>
             </td>
           </tbody>
           <tbody>
@@ -54,7 +51,7 @@ export function Home() {
               Tecnologia da Informação
             </td>
             <td>
-              <button className="w-36 py-1 px-4 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md flex flex-row space-x-3 items-center justify-start">
+              <button className="w-36 py-1 px-4 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md flex flex-row items-center justify-around">
                 <CheckCircle size={28} weight="fill" color="#00f597" />
                 <p>Avaliado</p>
               </button>
