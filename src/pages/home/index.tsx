@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { MagnifyingGlass, CheckCircle, Star } from "phosphor-react";
 import { RatingModal } from "../../components/Modal";
+import { RatingStars } from "../../components/RatingStars";
 
 export function Home() {
   return (
@@ -10,7 +11,6 @@ export function Home() {
           Funcionários
         </h2>
       </header>
-
       <div className="w-full flex flex-col py-5 px-4 items-center gap-2 bg-gradient-to-b from-zinc-400 via-zinc-400  to-zinc-600 rounded-lg">
         <div className="w-full flex flex-row py-2 px-4 space-x-2 rounded-lg bg-zinc-200">
           <a href="">
@@ -22,6 +22,7 @@ export function Home() {
             className="text-xl font-medium focus:outline-none placeholder:font-bold placeholder:text-black placeholder:focus:opacity-25 bg-zinc-200"
           />
         </div>
+        <RatingStars />
 
         <table className="w-full bg-zinc-200 rounded-lg">
           <thead className="">
