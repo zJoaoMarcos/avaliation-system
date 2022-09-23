@@ -15,22 +15,39 @@ export function RatingModal() {
   return (
     <Dialog.DialogPortal>
       <Dialog.DialogOverlay className="bg-black/60 inset-0 fixed" />
-      <Dialog.Content className="w-[480px] flex flex-col justify-around bg-[#CCCCCC] py-8 px-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
-        <Dialog.DialogTitle className="flex flex-row items-center justify-center text-center text-2xl font-black space-x-2 text-black">
+      <Dialog.Content className="w-[600px] h-[95%] flex flex-col justify-between bg-[#CCCCCC] py-6 px-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
+        <Dialog.DialogTitle className="w-full flex flex-row items-center justify-center text-xl font-bold">
           Avaliação
-          <Star size={32} weight="fill" color="#FFFF00" />
+          <Star size={30} weight="bold" color="#FFFF00" className="ml-2" />
         </Dialog.DialogTitle>
-        <Dialog.DialogDescription className="text-black pl-2">
+        <Dialog.DialogDescription>
           <p className="font-semibold">João Matos</p>
           <span>Tecnologia da Informação</span>
         </Dialog.DialogDescription>
 
         <form
           onSubmit={handleRating}
-          className="h-[340px] flex flex-col justify-around space-y-2 my-4"
+          className="h-5/6 flex flex-col justify-between"
         >
-          <div className="h-full overflow-y-scroll space-y-2">
-            <RatingStars />
+          <div className="h-full overflow-y-auto space-y-2">
+            <RatingStars
+              id="atitudeEmpreendedora"
+              name="Atitude Empreendedora"
+            />
+            <RatingStars
+              id="autonomiaResponsabilidade"
+              name="Autonomia com Responsabilidade"
+            />
+            <RatingStars id="sensoTime" name="Senso de Time" />
+            <RatingStars id="sensoDono" name="Senso de Dono" />
+            <RatingStars id="focoResultado" name="Foco no Resultado" />
+            <RatingStars id="focoCliente" name="Foco no Cliente" />
+            <RatingStars id="visaoSistemica" name="Visão Sistêmica" />
+            <RatingStars id="inovacao" name="Inovação" />
+            <RatingStars
+              id="liderancaInspiradora"
+              name="Liderança Inspiradora"
+            />
           </div>
           <footer className="flex flex-row mt-4 justify-end space-x-2">
             <Dialog.Close

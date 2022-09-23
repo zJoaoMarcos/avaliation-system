@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { MagnifyingGlass, CheckCircle, Star } from "phosphor-react";
-import { RatingModal } from "../../components/Modal";
+import { RatingModal } from "../../components/RatingModal";
 import { RatingStars } from "../../components/RatingStars";
 
 export function Home() {
@@ -22,7 +22,6 @@ export function Home() {
             className="text-xl font-medium focus:outline-none placeholder:font-bold placeholder:text-black placeholder:focus:opacity-25 bg-zinc-200"
           />
         </div>
-        <RatingStars />
 
         <table className="w-full bg-zinc-200 rounded-lg">
           <thead className="">
@@ -41,8 +40,8 @@ export function Home() {
                 <Dialog.DialogTrigger className="w-36 py-1 px-5 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md gap-2 flex flex-row items-center justify-start">
                   <Star size={28} weight="fill" color="#FFFF00" />
                   Avaliar
-                  <RatingModal />
                 </Dialog.DialogTrigger>
+                <RatingModal />
               </Dialog.Root>
             </td>
           </tbody>
