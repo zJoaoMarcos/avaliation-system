@@ -1,9 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Star, PaperPlaneTilt, XCircle } from "phosphor-react";
 import { FormEvent } from "react";
+import { Employees } from "../../pages/Home";
 import { RatingStars } from "../RatingStars";
 
-export function RatingModal() {
+type EmployeeAvaliation = Omit<Employees, "ratings">;
+
+export function RatingModal({ name, email, department }: EmployeeAvaliation) {
   async function handleRating(event: FormEvent) {
     event.preventDefault();
 
@@ -21,8 +24,8 @@ export function RatingModal() {
           <Star size={30} weight="bold" color="#FFFF00" className="ml-2" />
         </Dialog.DialogTitle>
         <Dialog.DialogDescription>
-          <p className="font-semibold">João Matos</p>
-          <span>Tecnologia da Informação</span>
+          <p className="font-semibold">{name}</p>
+          <span>{department}</span>
         </Dialog.DialogDescription>
 
         <form

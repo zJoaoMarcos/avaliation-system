@@ -1,9 +1,22 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { MagnifyingGlass, CheckCircle, Star } from "phosphor-react";
+import { MagnifyingGlass } from "phosphor-react";
 import { RatingModal } from "../../components/RatingModal";
-import { RatingStars } from "../../components/RatingStars";
+import { useFetch } from "../../hooks/useFetch";
+
+export interface Employees {
+  name: string;
+  email: string;
+  department: string;
+  ratings: string[] | number[];
+}
 
 export function Home() {
+  const { data: repositories, error } = useFetch<Employees[]>(
+    `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${
+      import.meta.env.VITE_USER
+    }`
+  );
+
   return (
     <div className="w-screen h-screen flex flex-col items-center px-72 bg-zinc-500">
       <header className="w-full flex flex-row mt-14 mb-5">
@@ -25,37 +38,34 @@ export function Home() {
 
         <table className="w-full bg-zinc-200 rounded-lg">
           <thead className="">
-            <th className="p-3 text-lg font-semibold tracking-wide">Name</th>
-            <th className="p-3 text-lg font-semibold tracking-wide">
-              Departameto
-            </th>
+            <tr>
+              <th className="p-3 text-lg font-semibold tracking-wide">Name</th>
+              <th className="p-3 text-lg font-semibold tracking-wide">
+                Departameto
+              </th>
+            </tr>
           </thead>
           <tbody>
-            <td className="p-3 text-center text-base">João Matos</td>
-            <td className="p-3 text-center text-base">
-              Tecnologia da Informação
-            </td>
-            <td>
-              <Dialog.Root>
-                <Dialog.DialogTrigger className="w-36 py-1 px-5 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md gap-2 flex flex-row items-center justify-start">
-                  <Star size={28} weight="fill" color="#FFFF00" />
-                  Avaliar
-                </Dialog.DialogTrigger>
-                <RatingModal />
-              </Dialog.Root>
-            </td>
-          </tbody>
-          <tbody>
-            <td className="p-3 text-center text-base">Pedro Paizam</td>
-            <td className="p-3 text-center text-base">
-              Tecnologia da Informação
-            </td>
-            <td>
-              <button className="w-36 py-1 px-4 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md flex flex-row items-center justify-around">
-                <CheckCircle size={28} weight="fill" color="#00f597" />
-                <p>Avaliado</p>
-              </button>
-            </td>
+            {repositories?.map((employee) => (
+              <tr key={employee.email}>
+                <td className="p-3 text-center text-base">{employee.name}</td>
+                <td className="p-3 text-center text-base">
+                  {employee.department}
+                </td>
+                <td>
+                  <Dialog.Root>
+                    <Dialog.DialogTrigger className="w-36 py-1 px-5 bg-zinc-600 hover:bg-zinc-700 font-black text-white rounded-md gap-2 flex flex-row items-center justify-start">
+                      Avaliar
+                    </Dialog.DialogTrigger>
+                    <RatingModal
+                      department={employee.department}
+                      name={employee.name}
+                      email={employee.email}
+                    />
+                  </Dialog.Root>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
