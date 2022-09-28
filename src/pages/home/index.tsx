@@ -1,7 +1,9 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { MagnifyingGlass } from "phosphor-react";
+import { useEffect, useState } from "react";
 import { RatingModal } from "../../components/RatingModal";
 import { useFetch } from "../../hooks/useFetch";
+import { useAuth } from "../../contexts/authProvider";
 
 export interface Employees {
   name: string;
@@ -11,10 +13,12 @@ export interface Employees {
 }
 
 export function Home() {
-  const { data: repositories, error } = useFetch<Employees[]>(
-    `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${
-      import.meta.env.VITE_USER
-    }`
+  const { user } = useAuth();
+
+  console.log(user);
+
+  const { data: repositories } = useFetch<Employees[]>(
+    `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${user}`
   );
 
   return (
