@@ -1,19 +1,59 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Star, PaperPlaneTilt, XCircle } from "phosphor-react";
-import { FormEvent } from "react";
 import { Employees } from "../../pages/Home";
-import { RatingStars } from "../RatingStars";
+import Rating from "@mui/material/Rating";
+import { useForm, Controller } from "react-hook-form";
+import api from "../../services/api";
+import { useAuth } from "../../contexts/authProvider";
 
 type EmployeeAvaliation = Omit<Employees, "ratings">;
 
-export function RatingModal({ name, email, department }: EmployeeAvaliation) {
-  async function handleRating(event: FormEvent) {
-    event.preventDefault();
+type InputRatings = {
+  note1: number;
+  note2: number;
+  note3: number;
+  note4: number;
+  note5: number;
+  note6: number;
+  note7: number;
+  note8: number;
+  note9: number;
+};
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    const data = Object.fromEntries(formData);
-    console.log(data);
-  }
+export function RatingModal({ name, email, department }: EmployeeAvaliation) {
+  const { user } = useAuth();
+
+  const { control, handleSubmit } = useForm<InputRatings>();
+  const onSubmit = (data: any) => {
+    const note1 = data.note1;
+    const note2 = data.note2;
+    const note3 = data.note3;
+    const note4 = data.note4;
+    const note5 = data.note5;
+    const note6 = data.note6;
+    const note7 = data.note7;
+    const note8 = data.note8;
+    const note9 = data.note9;
+
+    api
+      .post(`/employee/${email}/rating`, {
+        whoVoted: user,
+        sensoTime: note1,
+        atitudeEmpreendedora: note2,
+        autonomiaResponsabilidade: note3,
+        sensoDono: note4,
+        focoResultado: note5,
+        focoCliente: note6,
+        visaoSistemica: note9,
+        inovacao: note7,
+        liderancaInspiradora: note8,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Dialog.DialogPortal>
@@ -21,53 +61,80 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
       <Dialog.Content className="w-[600px] h-[95%] flex flex-col justify-between bg-[#CCCCCC] py-6 px-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
         <Dialog.DialogTitle className="w-full flex flex-row items-center justify-center text-xl font-bold">
           Avaliação
-          <Star size={30} weight="bold" color="#FFFF00" className="ml-2" />
         </Dialog.DialogTitle>
-        <Dialog.DialogDescription>
-          <p className="font-semibold">{name}</p>
+        <Dialog.DialogDescription className="font-semibold">
+          {name}
           <span>{department}</span>
         </Dialog.DialogDescription>
-
         <form
-          onSubmit={handleRating}
+          onSubmit={handleSubmit(onSubmit)}
           className="h-5/6 flex flex-col justify-between"
         >
-          <div className="h-full overflow-y-auto space-y-2">
-            <RatingStars
-              id="atitudeEmpreendedora"
-              name="Atitude Empreendedora"
-            />
-            <RatingStars
-              id="autonomiaResponsabilidade"
-              name="Autonomia com Responsabilidade"
-            />
-            <RatingStars id="sensoTime" name="Senso de Time" />
-            <RatingStars id="sensoDono" name="Senso de Dono" />
-            <RatingStars id="focoResultado" name="Foco no Resultado" />
-            <RatingStars id="focoCliente" name="Foco no Cliente" />
-            <RatingStars id="visaoSistemica" name="Visão Sistêmica" />
-            <RatingStars id="inovacao" name="Inovação" />
-            <RatingStars
-              id="liderancaInspiradora"
-              name="Liderança Inspiradora"
-            />
-          </div>
-          <footer className="flex flex-row mt-4 justify-end space-x-2">
-            <Dialog.Close
-              type="button"
-              className="w-36 py-1 px-4 bg-[#CB2727] hover:bg-[#CB0727] font-black text-white rounded-md flex flex-row space-x-3 items-center justify-between"
-            >
-              <XCircle size={28} weight="bold" color="#FFFFFF" />
-              Cancelar
-            </Dialog.Close>
-            <button
-              type="submit"
-              className="w-28 py-1 px-4 bg-[#2770CB] hover:bg-[#2740CB] font-black text-white rounded-md flex flex-row space-x-3 items-center justify-between"
-            >
-              <PaperPlaneTilt size={24} weight="duotone" color="#FFFFFF" />
-              Enviar
-            </button>
-          </footer>
+          <label>Nota1:</label>
+          <Controller
+            name="note1"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota2:</label>
+          <Controller
+            name="note2"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota3:</label>
+          <Controller
+            name="note3"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota4:</label>
+          <Controller
+            name="note4"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota5:</label>
+          <Controller
+            name="note5"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota6:</label>
+          <Controller
+            name="note6"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota7:</label>
+          <Controller
+            name="note7"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota8:</label>
+          <Controller
+            name="note8"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+          <label>Nota9:</label>
+          <Controller
+            name="note9"
+            control={control}
+            defaultValue={0}
+            render={({ field }) => <Rating {...field} name="note1" />}
+          />
+
+          <button type="submit">Enviar</button>
         </form>
       </Dialog.Content>
     </Dialog.DialogPortal>
