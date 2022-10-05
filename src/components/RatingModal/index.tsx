@@ -24,15 +24,15 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
 
   const { control, handleSubmit } = useForm<InputRatings>();
   const onSubmit = (data: any) => {
-    const note1 = data.note1;
-    const note2 = data.note2;
-    const note3 = data.note3;
-    const note4 = data.note4;
-    const note5 = data.note5;
-    const note6 = data.note6;
-    const note7 = data.note7;
-    const note8 = data.note8;
-    const note9 = data.note9;
+    const note1 = Number(data.note1);
+    const note2 = Number(data.note2);
+    const note3 = Number(data.note3);
+    const note4 = Number(data.note4);
+    const note5 = Number(data.note5);
+    const note6 = Number(data.note6);
+    const note7 = Number(data.note7);
+    const note8 = Number(data.note8);
+    const note9 = Number(data.note9);
 
     api
       .post(`/employee/${email}/rating`, {
@@ -74,63 +74,63 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
           <Controller
             name="note1"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota2:</label>
           <Controller
             name="note2"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota3:</label>
           <Controller
             name="note3"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota4:</label>
           <Controller
             name="note4"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota5:</label>
           <Controller
             name="note5"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota6:</label>
           <Controller
             name="note6"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota7:</label>
           <Controller
             name="note7"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota8:</label>
           <Controller
             name="note8"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
           <label>Nota9:</label>
           <Controller
             name="note9"
             control={control}
-            defaultValue={0}
+            defaultValue={1}
             render={({ field }) => <Rating {...field} name="note1" />}
           />
 
