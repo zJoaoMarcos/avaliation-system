@@ -1,6 +1,4 @@
-# Project
-
-## Object
+## objective
 
 The objective of the project is to create an evaluation/gamification system within the intranet of the company where I work.
 
