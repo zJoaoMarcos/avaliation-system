@@ -37,15 +37,15 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
     api
       .post(`/employee/${email}/rating`, {
         whoVoted: user,
-        sensoTime: note1,
-        atitudeEmpreendedora: note2,
-        autonomiaResponsabilidade: note3,
-        sensoDono: note4,
-        focoResultado: note5,
-        focoCliente: note6,
-        visaoSistemica: note9,
-        inovacao: note7,
-        liderancaInspiradora: note8,
+        note1: note1,
+        note2: note2,
+        note3: note3,
+        note4: note4,
+        note5: note5,
+        note6: note6,
+        note7: note7,
+        note8: note8,
+        note9: note9,
       })
       .then((response) => {
         console.log(response);
