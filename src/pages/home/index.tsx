@@ -8,11 +8,12 @@ export interface Employees {
   name: string;
   email: string;
   department: string;
-  ratings: Array<Ratings>;
+  ratings: Ratings[] | [];
 }
 
 export interface Ratings {
-  whoVote: string;
+  id: string;
+  whoVoted: string;
 }
 
 export function Home() {
@@ -53,27 +54,50 @@ export function Home() {
               </tr>
             </thead>
             <tbody>
-              {repositories?.map((employee) => (
-                <tr key={employee.email}>
+              {repositories?.map(({ email, name, department, ratings }) => (
+                <tr key={email}>
                   <td className="font-semibold text-center text-base p-6">
-                    {employee.name}
+                    {name}
                   </td>
                   <td className="font-semibold text-center text-base p-6">
-                    {employee.department}
+                    {department}
                   </td>
                   <td>
+                    {ratings.map((rating, id) => {
+                      if (
+                        rating.whoVoted ===
+                        "joao.matos@construtorapatriani.com.br"
+                      ) {
+                        return <button key={rating.whoVoted}>Dissable</button>;
+                      }
+                      return (
+                        <Dialog.Root>
+                          <Dialog.DialogTrigger className="w-36 py-1.5 px-6 bg-[#4F46BB] hover:bg-[#292194] font-medium text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md">
+                            <Star size={26} color="#ffd171" weight="bold" />
+                            Avaliar
+                          </Dialog.DialogTrigger>
+                          <RatingModal
+                            department={department}
+                            name={name}
+                            email={email}
+                          />
+                        </Dialog.Root>
+                      );
+                    })}
+                  </td>
+                  {/* <td>
                     <Dialog.Root>
                       <Dialog.DialogTrigger className="w-36 py-1.5 px-6 bg-[#4F46BB] hover:bg-[#292194] font-medium text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md">
                         <Star size={26} color="#ffd171" weight="bold" />
                         Avaliar
                       </Dialog.DialogTrigger>
                       <RatingModal
-                        department={employee.department}
-                        name={employee.name}
-                        email={employee.email}
+                        department={department}
+                        name={name}
+                        email={email}
                       />
                     </Dialog.Root>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
