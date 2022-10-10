@@ -1,16 +1,18 @@
-import { MagnifyingGlass } from "phosphor-react";
-import { RatingButton } from "../../components/RatingButton";
 import { useAuth } from "../../contexts/authProvider";
 import { useFetch } from "../../hooks/useFetch";
+import { MagnifyingGlass } from "phosphor-react";
+import { RatingButton } from "../../components/RatingButton";
 
 export interface Employees {
   name: string;
   email: string;
   department: string;
-  ratings: {
-    id: string;
-    whoVoted: string;
-  };
+  ratings: [
+    {
+      id: string;
+      whoVoted: string;
+    }
+  ];
 }
 
 export function Home() {
@@ -20,11 +22,16 @@ export function Home() {
     `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${user}`
   );
 
-  console.log(
-    repositories?.map((item) => {
-      JSON.stringify(item.ratings);
-    })
-  );
+  function validateWasVoted(employees: Employees): boolean {
+    const wasVoted = employees.ratings.map((rating): boolean => {
+      if (rating.whoVoted.indexOf(`${user}`)) {
+        return true;
+      }
+      return false;
+    });
+
+    return wasVoted[0];
+  }
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center px-72 bg-[#DBDBDB]">
@@ -57,21 +64,20 @@ export function Home() {
               </tr>
             </thead>
             <tbody>
-              {repositories?.map(({ email, name, department, ratings }) => (
-                <tr key={email}>
+              {repositories?.map((employee) => (
+                <tr key={employee.email}>
                   <td className="font-semibold text-center text-base p-6">
-                    {name}
+                    {employee.name}
                   </td>
                   <td className="font-semibold text-center text-base p-6">
-                    {department}
+                    {employee.department}
                   </td>
-                  <td></td>
                   <td>
                     <RatingButton
-                      disable={false}
-                      department={department}
-                      name={name}
-                      email={email}
+                      disable={validateWasVoted(employee)}
+                      department={employee.department}
+                      name={employee.name}
+                      email={employee.email}
                     />
                   </td>
                 </tr>

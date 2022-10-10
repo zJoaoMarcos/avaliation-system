@@ -69,7 +69,7 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
         </Dialog.DialogDescription>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="h-full flex flex-col justify-between overflow-y-auto"
+          className="h-full flex flex-col pt-4 justify-between overflow-y-auto"
         >
           <div className="flex flex-col space-y-1 overflow-y-auto py-1">
             <div className="flex flex-col p-1 rounded-lg shadow-md shadow-black/20">

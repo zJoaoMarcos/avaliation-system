@@ -10,6 +10,10 @@ interface InputProps {
 }
 
 export function RatingButton({ disable, department, name, email }: InputProps) {
+  if (disable == undefined) {
+    disable = false;
+  }
+
   return (
     <>
       <Dialog.Root>
