@@ -17,9 +17,7 @@ export function Home() {
   const { user } = useAuth();
 
   const { data: repositories } = useFetch<Employees[]>(
-    `${
-      import.meta.env.VITE_API_AVALIATION_SYSTEM_URL
-    }employees/joao.matos@construtorapatriani.com.br`
+    `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${user}`
   );
 
   console.log(
