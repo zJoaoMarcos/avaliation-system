@@ -1,26 +1,31 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { MagnifyingGlass, Star } from "phosphor-react";
-import { RatingModal } from "../../components/RatingModal";
-import { useFetch } from "../../hooks/useFetch";
+import { MagnifyingGlass } from "phosphor-react";
+import { RatingButton } from "../../components/RatingButton";
 import { useAuth } from "../../contexts/authProvider";
+import { useFetch } from "../../hooks/useFetch";
 
 export interface Employees {
   name: string;
   email: string;
   department: string;
-  ratings: Ratings[] | [];
-}
-
-export interface Ratings {
-  id: string;
-  whoVoted: string;
+  ratings: {
+    id: string;
+    whoVoted: string;
+  };
 }
 
 export function Home() {
   const { user } = useAuth();
 
   const { data: repositories } = useFetch<Employees[]>(
-    `${import.meta.env.VITE_API_AVALIATION_SYSTEM_URL}employees/${user}`
+    `${
+      import.meta.env.VITE_API_AVALIATION_SYSTEM_URL
+    }employees/joao.matos@construtorapatriani.com.br`
+  );
+
+  console.log(
+    repositories?.map((item) => {
+      JSON.stringify(item.ratings);
+    })
   );
 
   return (
@@ -62,42 +67,15 @@ export function Home() {
                   <td className="font-semibold text-center text-base p-6">
                     {department}
                   </td>
+                  <td></td>
                   <td>
-                    {ratings.map((rating, id) => {
-                      if (
-                        rating.whoVoted ===
-                        "joao.matos@construtorapatriani.com.br"
-                      ) {
-                        return <button key={rating.whoVoted}>Dissable</button>;
-                      }
-                      return (
-                        <Dialog.Root>
-                          <Dialog.DialogTrigger className="w-36 py-1.5 px-6 bg-[#4F46BB] hover:bg-[#292194] font-medium text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md">
-                            <Star size={26} color="#ffd171" weight="bold" />
-                            Avaliar
-                          </Dialog.DialogTrigger>
-                          <RatingModal
-                            department={department}
-                            name={name}
-                            email={email}
-                          />
-                        </Dialog.Root>
-                      );
-                    })}
+                    <RatingButton
+                      disable={false}
+                      department={department}
+                      name={name}
+                      email={email}
+                    />
                   </td>
-                  {/* <td>
-                    <Dialog.Root>
-                      <Dialog.DialogTrigger className="w-36 py-1.5 px-6 bg-[#4F46BB] hover:bg-[#292194] font-medium text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md">
-                        <Star size={26} color="#ffd171" weight="bold" />
-                        Avaliar
-                      </Dialog.DialogTrigger>
-                      <RatingModal
-                        department={department}
-                        name={name}
-                        email={email}
-                      />
-                    </Dialog.Root>
-                  </td> */}
                 </tr>
               ))}
             </tbody>
