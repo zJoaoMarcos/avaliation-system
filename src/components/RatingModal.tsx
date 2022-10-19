@@ -1,12 +1,12 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { Employees } from "../../pages/Home";
 import Rating from "@mui/material/Rating";
-import { useForm, Controller } from "react-hook-form";
-import api from "../../services/api";
-import { useAuth } from "../../contexts/authProvider";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Star } from "phosphor-react";
+import { Controller, useForm } from "react-hook-form";
+import { useAuth } from "../contexts/authProvider";
+import { Employee } from "../pages/Home";
+import api from "../services/api";
 
-type EmployeeAvaliation = Omit<Employees, "ratings">;
+type EmployeeAvaliation = Omit<Employee, "ratings">;
 
 type InputRatings = {
   note1: number;

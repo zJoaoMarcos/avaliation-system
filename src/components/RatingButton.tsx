@@ -1,29 +1,27 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Star } from "phosphor-react";
-import { RatingModal } from "../../components/RatingModal";
+import { RatingModal } from "./RatingModal";
 
 interface InputProps {
   department: string;
   name: string;
   email: string;
-  disable?: boolean;
+  disable?: boolean[];
 }
 
 export function RatingButton({ disable, department, name, email }: InputProps) {
-  if (disable == undefined) {
-    disable = false;
-  }
-
   return (
     <>
       <Dialog.Root>
         <Dialog.DialogTrigger
-          disabled={disable}
+          disabled={disable?.indexOf(true) === -1 ? false : true}
           className={
-            disable === false ? "ratingButton-enable" : "ratingButton-disable"
+            disable?.indexOf(true) === -1
+              ? "ratingButton-enable"
+              : "ratingButton-disable"
           }
         >
-          {disable === false ? (
+          {disable?.indexOf(true) === -1 ? (
             <>
               <Star size={26} color="#ffd171" weight="bold" /> Avaliar
             </>
