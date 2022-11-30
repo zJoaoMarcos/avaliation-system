@@ -2,7 +2,8 @@ import Rating from "@mui/material/Rating";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Star } from "phosphor-react";
 import { Controller, useForm } from "react-hook-form";
-import { Employee } from "../pages/Home";
+import { Employee } from "../@types/employees";
+
 import api from "../services/api";
 
 type EmployeeAvaliation = Omit<Employee, "ratings">;

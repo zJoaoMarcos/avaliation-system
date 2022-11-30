@@ -1,18 +1,8 @@
 import { useEffect, useState } from "react";
+import { Employee } from "../../@types/employees";
 import { Header } from "../../components/Header";
 import { SearchButton } from "../../components/SearchButton";
 import { TableRowEmployee } from "../../components/TableRowEmployee";
-
-export interface Employee {
-  name: string;
-  email: string;
-  department: string;
-  ratings: [
-    {
-      whoVoted: string;
-    }
-  ];
-}
 
 export function Home() {
   const [employees, setEmployees] = useState<Employee[]>([]);
