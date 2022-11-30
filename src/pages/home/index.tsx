@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { SearchButton } from "../../components/SearchButton";
 import { TableRowEmployee } from "../../components/TableRowEmployee";
-import { useAuth } from "../../contexts/authProvider";
 
 export interface Employee {
   name: string;
@@ -17,7 +16,6 @@ export interface Employee {
 
 export function Home() {
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const { user } = useAuth();
 
   useEffect(() => {
     fetch(
@@ -27,7 +25,7 @@ export function Home() {
     )
       .then((response) => response.json())
       .then((data) => setEmployees(data));
-  }, [user]);
+  }, []);
 
   console.log(employees);
 

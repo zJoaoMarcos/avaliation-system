@@ -4,7 +4,7 @@ The objective of the project is to create an evaluation/gamification system with
 
 ## Tasks
 
-- [x] Get localStorage token in intranet
+- [] Create Auth with Microsoft
 - [x] Create rating input
 - [x] Consuming Back-End in Front
 - [x] Vote in Back-End
