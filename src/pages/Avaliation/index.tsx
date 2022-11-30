@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { SearchButton } from "../../components/SearchButton";
 import { TableRowEmployee } from "../../components/TableRowEmployee";
 
-export function Home() {
+export function Avaliation() {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
