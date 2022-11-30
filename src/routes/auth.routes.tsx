@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignIn } from "../pages/SignIn";
+import { SignIn } from "../pages/SignIn/index";
 
 export function AuthRoutes() {
   return (
