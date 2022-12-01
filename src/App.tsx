@@ -5,7 +5,8 @@ import "./styles/main.css";
 
 const configuration: Configuration = {
   auth: {
-    clientId: "e79eea08-52d8-4c4b-a8b0-2c5068c8f2c6",
+    clientId: `${import.meta.env.AZURE_APP_ID}`,
+    authority: "https://login.microsoftonline.com/common",
   },
 };
 
