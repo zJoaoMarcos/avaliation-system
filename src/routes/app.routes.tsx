@@ -5,7 +5,7 @@ export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/avaliation" element={<Avaliation />} />
+        <Route path="/" element={<Avaliation />} />
       </Routes>
     </BrowserRouter>
   );

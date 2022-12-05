@@ -17,8 +17,6 @@ export function Avaliation() {
       .then((data) => setEmployees(data));
   }, []);
 
-  console.log(employees);
-
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center px-72 bg-[#DBDBDB]">
       <Header />
