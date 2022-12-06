@@ -2,7 +2,7 @@ import Rating from "@mui/material/Rating";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Star } from "phosphor-react";
 import { Controller, useForm } from "react-hook-form";
-import { Employee } from "../@types/employees";
+import { Employee, useRating } from "../hooks/useRating";
 
 import api from "../services/api";
 
@@ -22,6 +22,8 @@ type InputRatings = {
 
 export function RatingModal({ name, email, department }: EmployeeAvaliation) {
   const { control, handleSubmit } = useForm<InputRatings>();
+  const { user } = useRating();
+
   const onSubmit = (data: any) => {
     const note1 = Number(data.note1);
     const note2 = Number(data.note2);
@@ -35,7 +37,7 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
 
     api
       .post(`/employee/${email}/rating`, {
-        whoVoted: "user",
+        whoVoted: user?.mail,
         note1: note1,
         note2: note2,
         note3: note3,

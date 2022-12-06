@@ -4,7 +4,7 @@ The objective of the project is to create an evaluation/gamification system with
 
 ## Tasks
 
-- [] Create Auth with Microsoft
+- [x] Create Auth with Microsoft
 - [x] Create rating input
 - [x] Consuming Back-End in Front
 - [x] Vote in Back-End

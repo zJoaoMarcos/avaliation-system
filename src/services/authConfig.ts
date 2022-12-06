@@ -9,13 +9,14 @@ import { LogLevel } from "@azure/msal-browser";
  * For a full list of MSAL.js configuration parameters, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
  */
+
 export const msalConfig = {
   auth: {
-    clientId: `${import.meta.env.AZURE_APP_ID}`,
+    clientId: import.meta.env.VITE_AZURE_APP_ID,
     authority: `https://login.microsoftonline.com/${
-      import.meta.env.AZURE_DIRECTORY_ID
+      import.meta.env.VITE_AZURE_DIRECTORY_ID
     }`,
-    redirectUri: "http://localhost:5173/",
+    redirectUri: import.meta.env.VITE_AZURE_REDIRECT_URI,
   },
   cache: {
     cacheLocation: "sessionStorage", // This configures where your cache will be stored
