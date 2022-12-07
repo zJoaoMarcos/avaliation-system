@@ -23,11 +23,11 @@ export function RatingButton({ disable, department, name, email }: InputProps) {
         >
           {disable?.indexOf(true) === -1 ? (
             <>
-              <Star size={26} color="#ffd171" weight="bold" /> Avaliar
+              <Star size={24} color="#ffd171" weight="bold" /> Avaliar
             </>
           ) : (
             <>
-              <Check size={26} color="#2eff58" weight="bold" /> Avaliado
+              <Check size={24} color="#2eff58" weight="bold" /> Avaliado
             </>
           )}
         </Dialog.DialogTrigger>

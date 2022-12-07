@@ -6,7 +6,7 @@ export function SearchButton() {
 
   return (
     <div className="w-full flex flex-row py-2 px-4 space-x-2 rounded-lg bg-white shadow-md shadow-black/25 ">
-      <MagnifyingGlass size={30} />
+      <MagnifyingGlass size={24} />
       <input
         type="text"
         placeholder="Buscar..."

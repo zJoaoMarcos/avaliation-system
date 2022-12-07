@@ -5,7 +5,7 @@ export function Header() {
   const { user } = useRating();
 
   return (
-    <div className="w-full flex flex-row items-center justify-between py-2 px-12 bg-white shadow-md">
+    <div className="w-full flex flex-row items-center justify-between py-2 px-10 lg:px-12 bg-white shadow-md">
       <img src="https://www.construtorapatriani.com.br/_next/image?url=%2Fimages%2FLogo-red.svg&w=256&q=75" />
 
       <div className="flex flex-row items-center gap-4">

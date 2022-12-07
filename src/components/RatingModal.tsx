@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Employee, useRating } from "../hooks/useRating";
 
 import api from "../services/api";
+import { UserAvatar } from "./UserAvatar";
 
 type EmployeeAvaliation = Omit<Employee, "ratings">;
 
@@ -64,8 +65,16 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
           Avaliação
         </Dialog.DialogTitle>
         <Dialog.DialogDescription className="flex flex-col font-semibold">
-          {name}
-          <span className="font-normal">{department}</span>
+          <div className="flex flex-row items-center gap-2">
+            <UserAvatar
+              urlImage={`https://construtorapatrianioutlook.sharepoint.com/_vti_bin/DelveApi.ashx/people/profileimage?size=L&userId=${email}&u=1670349934420`}
+              alt={name}
+            />
+            <div>
+              <p>{name}</p>
+              <span className="font-normal">{department}</span>
+            </div>
+          </div>
         </Dialog.DialogDescription>
         <form
           onSubmit={handleSubmit(onSubmit)}
