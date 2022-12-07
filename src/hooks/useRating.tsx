@@ -59,7 +59,7 @@ export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
 
   useEffect(() => {
     async function getUserData() {
-      instance
+      await instance
         .acquireTokenSilent({
           ...loginRequest,
           account: accounts[0],

@@ -9,6 +9,7 @@ export function SignIn() {
     await instance.loginPopup(loginRequest).catch((e) => {
       console.log(e);
     });
+    await instance.acquireTokenPopup(loginRequest);
   };
 
   return (
