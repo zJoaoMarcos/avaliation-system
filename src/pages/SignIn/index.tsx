@@ -1,17 +1,22 @@
 import { useMsal } from "@azure/msal-react";
 import { AnimationSignIn } from "../../components/AnimationSignIn";
-import { loginRequest } from "../../services/authConfig";
 
 export function SignIn() {
   const { instance } = useMsal();
 
   const handleLogin = async () => {
     /*  await instance.loginPopup(loginRequest); */
-    await instance.acquireTokenPopup(loginRequest);
+    /* await instance.acquireTokenPopup(loginRequest); */
+    await instance.handleRedirectPromise();
+    const accounts = instance.getAllAccounts();
+    if (accounts.length === 0) {
+      // No user signed in
+      instance.loginRedirect();
+    }
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center px-20 ">
+    <div className="w-screen h-screen flex flex-col items-center justify-center py-8 px-20 ">
       <AnimationSignIn />
 
       <div className="w-1/2 flex flex-col justify-center items-center gap-14 mt-10">
