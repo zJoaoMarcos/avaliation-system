@@ -1,12 +1,12 @@
+import { InteractionStatus } from "@azure/msal-browser";
 import { useMsal } from "@azure/msal-react";
 import { AnimationSignIn } from "../../components/AnimationSignIn";
 
 export function SignIn() {
-  const { instance } = useMsal();
+  const { instance, inProgress } = useMsal();
 
   const handleLogin = async () => {
-    /*  await instance.loginPopup(loginRequest); */
-    /* await instance.acquireTokenPopup(loginRequest); */
+    inProgress === InteractionStatus.None;
     await instance.handleRedirectPromise();
     const accounts = instance.getAllAccounts();
     if (accounts.length === 0) {
