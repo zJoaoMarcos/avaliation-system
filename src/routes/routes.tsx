@@ -7,9 +7,11 @@ export function Routes() {
   const isAuthenticated = useIsAuthenticated();
   const { inProgress } = useMsal();
 
-  return isAuthenticated && inProgress === InteractionStatus.None ? (
-    <AppRoutes />
-  ) : (
+  console.log(inProgress);
+
+  return !isAuthenticated && inProgress === InteractionStatus.None ? (
     <AuthRoutes />
+  ) : (
+    <AppRoutes />
   );
 }

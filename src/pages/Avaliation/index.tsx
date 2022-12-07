@@ -17,9 +17,9 @@ export function Avaliation() {
             <thead className="border-b-2 border-separate ">
               <tr>
                 <th></th>
-                <th className="p-3 text-lg font-bold tracking-wide">Name</th>
+                <th className="p-3 text-lg font-bold tracking-wide">Nome</th>
                 <th className="p-3 text-lg font-bold tracking-wide">
-                  Departameto
+                  Departamento
                 </th>
               </tr>
             </thead>
