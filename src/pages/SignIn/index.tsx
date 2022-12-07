@@ -5,8 +5,8 @@ import { loginRequest } from "../../services/authConfig";
 export function SignIn() {
   const { instance } = useMsal();
 
-  const handleLogin = () => {
-    instance.loginPopup(loginRequest).catch((e) => {
+  const handleLogin = async () => {
+    await instance.loginPopup(loginRequest).catch((e) => {
       console.log(e);
     });
   };
