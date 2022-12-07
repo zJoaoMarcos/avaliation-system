@@ -6,10 +6,7 @@ export function SignIn() {
   const { instance } = useMsal();
 
   const handleLogin = async () => {
-    await instance.loginPopup(loginRequest).catch((e) => {
-      console.log(e);
-    });
-    await instance.acquireTokenPopup(loginRequest);
+    await instance.loginPopup(loginRequest);
   };
 
   return (
