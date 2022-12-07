@@ -16,7 +16,10 @@ export function SignIn() {
       <AnimationSignIn />
 
       <div className="w-1/2 flex flex-col justify-center items-center gap-14 mt-10">
-        <h2 className="text-center text-4xl font-bold">
+        <h2
+          className="text-center text-2xl
+         md:text-4xl font-bold"
+        >
           Programa de Reconhecimento Patriani
         </h2>
 
