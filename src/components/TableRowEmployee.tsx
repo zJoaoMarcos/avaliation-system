@@ -20,7 +20,7 @@ export function TableRowEmployee(props: EmployeesProps) {
 
   return (
     <tr key={props.employee.email}>
-      <td className="pl-4 md:pl-8">
+      <td className="pl-4 sm:pl-10">
         <UserAvatar
           urlImage={`https://construtorapatrianioutlook.sharepoint.com/_vti_bin/DelveApi.ashx/people/profileimage?size=L&userId=${props.employee.email}&u=1670349934420`}
           alt={props.employee.name}
@@ -29,10 +29,10 @@ export function TableRowEmployee(props: EmployeesProps) {
       <td className="font-semibold text-left md:text-base px-2 text-xs">
         {props.employee.name}
       </td>
-      <td className="font-semibold text-center md:text-base px-2 text-xs">
+      <td className="font-semibold text-center md:text-base hidden sm:flex pt-6 px-2 text-xs">
         {props.employee.department}
       </td>
-      <td className="pr-4 md:pr-0">
+      <td className="pr-4 sm:pr-6 md:pr-0">
         <RatingButton
           disable={props.employee.ratings.map((vote) =>
             vote.whoVoted.toString() === user?.mail ? true : false

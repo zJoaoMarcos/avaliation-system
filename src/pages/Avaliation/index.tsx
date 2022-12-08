@@ -10,34 +10,43 @@ export function Avaliation() {
     <div className="w-full min-h-screen overflow-x-hidden flex flex-col items-center bg-[#DBDBDB]">
       <Header />
 
-      <div className="w-[480px] sm:w-[820px] flex flex-col py-6 px-4 items-center gap-3 ">
+      <div className="w-screen md:w-3/4 flex flex-col py-6 px-4 items-center gap-3 ">
         <SearchButton />
         <div className="w-full py-4 bg-white rounded-lg shadow-md shadow-black/25">
           <table className="w-full">
-            <thead className="border-b-2 border-separate ">
+            <thead className="border-b-2 border-separate hidden ">
               <tr>
                 <th></th>
                 <th className="p-3 text-left text-sm">Nome</th>
-                <th className="p-3 text-sm">Departamento</th>
+                <th className="p-3 hidden sm:block text-sm">Departamento</th>
               </tr>
             </thead>
-            {search.length > 0 ? (
-              <tbody>
-                {filteredEmployees.map((employee) => {
-                  return (
-                    <TableRowEmployee key={employee.name} employee={employee} />
-                  );
-                })}
-              </tbody>
-            ) : (
-              <tbody>
-                {employees.map((employee) => {
-                  return (
-                    <TableRowEmployee key={employee.name} employee={employee} />
-                  );
-                })}
-              </tbody>
-            )}
+
+            <tbody className="">
+              {search.length > 0 ? (
+                <>
+                  {filteredEmployees.map((employee) => {
+                    return (
+                      <TableRowEmployee
+                        key={employee.name}
+                        employee={employee}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {employees.map((employee) => {
+                    return (
+                      <TableRowEmployee
+                        key={employee.name}
+                        employee={employee}
+                      />
+                    );
+                  })}
+                </>
+              )}
+            </tbody>
           </table>
         </div>
       </div>
