@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "react-toastify";
 import api from "../services/api";
 import { loginRequest } from "../services/authConfig";
 import { callMsGraph } from "../services/graphs";
@@ -26,6 +27,18 @@ interface User {
   mail: string;
 }
 
+interface RatingsEmployee {
+  note1: number;
+  note2: number;
+  note3: number;
+  note4: number;
+  note5: number;
+  note6: number;
+  note7: number;
+  note8: number;
+  note9: number;
+}
+
 interface RatingProviderProps {
   children: ReactNode;
 }
@@ -36,21 +49,26 @@ interface RatingContextData {
   search: string;
   searchEmployees: (employee: string) => void;
   filteredEmployees: Employee[] | [];
+  ratingEmployee: (employeeEmail: string, ratings: RatingsEmployee) => void;
+  modalOpen: boolean;
+  closeModal: () => void;
+  isLoading: boolean;
 }
 
 const RatingContext = createContext<RatingContextData>({} as RatingContextData);
 
 export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [user, setUser] = useState<User>();
-
-  console.log(search);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     async function getEmployees() {
       const response = await api.get(`employees/${user?.mail}`);
       setEmployees(response.data);
+      setIsLoading(false);
     }
     getEmployees();
   }, [user]);
@@ -84,9 +102,38 @@ export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
         )
       : [];
 
+  async function ratingEmployee(
+    employeeEmail: string,
+    ratings: RatingsEmployee
+  ) {
+    try {
+      await api.post(`/employee/${employeeEmail}/rating`, {
+        whoVoted: user?.mail,
+        ...ratings,
+      });
+      toast.success("Avaliação Concluida!!");
+    } catch {
+      toast.error("Falha na sua Avaliação");
+    }
+  }
+
+  const closeModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
   return (
     <RatingContext.Provider
-      value={{ employees, searchEmployees, filteredEmployees, search, user }}
+      value={{
+        employees,
+        searchEmployees,
+        ratingEmployee,
+        filteredEmployees,
+        search,
+        user,
+        modalOpen,
+        closeModal,
+        isLoading,
+      }}
     >
       {children}
     </RatingContext.Provider>

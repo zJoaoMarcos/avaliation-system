@@ -4,7 +4,6 @@ import { Star } from "phosphor-react";
 import { Controller, useForm } from "react-hook-form";
 import { Employee, useRating } from "../hooks/useRating";
 
-import api from "../services/api";
 import { UserAvatar } from "./UserAvatar";
 
 type EmployeeAvaliation = Omit<Employee, "ratings">;
@@ -23,44 +22,27 @@ type InputRatings = {
 
 export function RatingModal({ name, email, department }: EmployeeAvaliation) {
   const { control, handleSubmit } = useForm<InputRatings>();
-  const { user } = useRating();
+  const { ratingEmployee, closeModal } = useRating();
 
-  const onSubmit = (data: any) => {
-    const note1 = Number(data.note1);
-    const note2 = Number(data.note2);
-    const note3 = Number(data.note3);
-    const note4 = Number(data.note4);
-    const note5 = Number(data.note5);
-    const note6 = Number(data.note6);
-    const note7 = Number(data.note7);
-    const note8 = Number(data.note8);
-    const note9 = Number(data.note9);
-
-    api
-      .post(`/employee/${email}/rating`, {
-        whoVoted: user?.mail,
-        note1: note1,
-        note2: note2,
-        note3: note3,
-        note4: note4,
-        note5: note5,
-        note6: note6,
-        note7: note7,
-        note8: note8,
-        note9: note9,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleRating = (data: any) => {
+    ratingEmployee(email, {
+      note1: Number(data.note1),
+      note2: Number(data.note2),
+      note3: Number(data.note3),
+      note4: Number(data.note4),
+      note5: Number(data.note5),
+      note6: Number(data.note6),
+      note7: Number(data.note7),
+      note8: Number(data.note8),
+      note9: Number(data.note9),
+    });
+    closeModal();
   };
 
   return (
     <Dialog.DialogPortal>
-      <Dialog.DialogOverlay className="bg-black/60 inset-0 fixed" />
-      <Dialog.Content className="w-[700px] h-[95%] flex flex-col justify-between bg-white py-6 px-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
+      <Dialog.DialogOverlay className="bg-black/10 inset-0 fixed" />
+      <Dialog.Content className="w-[700px] h-[95%] flex flex-col justify-between bg-white py-6 px-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-md shadow-black/10">
         <Dialog.DialogTitle className="w-full flex flex-row items-center justify-center text-2xl font-bold">
           Avaliação
         </Dialog.DialogTitle>
@@ -77,7 +59,7 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
           </div>
         </Dialog.DialogDescription>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleRating)}
           className="h-full flex flex-col pt-4 justify-between overflow-y-auto"
         >
           <div className="flex flex-col space-y-1 overflow-y-auto py-1">

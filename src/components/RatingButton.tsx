@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Star } from "phosphor-react";
+import { useRating } from "../hooks/useRating";
 import { RatingModal } from "./RatingModal";
 
 interface InputProps {
@@ -10,9 +11,11 @@ interface InputProps {
 }
 
 export function RatingButton({ disable, department, name, email }: InputProps) {
+  const { modalOpen, closeModal } = useRating();
+
   return (
     <>
-      <Dialog.Root>
+      <Dialog.Root open={modalOpen} onOpenChange={closeModal}>
         <Dialog.DialogTrigger
           disabled={disable?.indexOf(true) === -1 ? false : true}
           className={
