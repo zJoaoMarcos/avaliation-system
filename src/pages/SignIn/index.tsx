@@ -10,7 +10,7 @@ export function SignIn() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center py-8 px-20 ">
+    <div className="w-auto h-screen flex flex-col items-center justify-center py-8 px-20 ">
       <AnimationSignIn />
 
       <div className="w-1/2 flex flex-col justify-center items-center gap-14 mt-10">
