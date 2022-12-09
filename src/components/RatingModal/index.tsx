@@ -1,14 +1,19 @@
 import Rating from "@mui/material/Rating";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Star } from "phosphor-react";
+import { Dispatch, SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Employee, useRating } from "../hooks/useRating";
+import { useRating } from "../../hooks/useRating";
+import { UserAvatar } from "../UserAvatar";
 
-import { UserAvatar } from "./UserAvatar";
+interface RatingModalProps {
+  name: string;
+  email: string;
+  department: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
 
-type EmployeeAvaliation = Omit<Employee, "ratings">;
-
-type InputRatings = {
+interface InputRatings {
   note1: number;
   note2: number;
   note3: number;
@@ -18,11 +23,16 @@ type InputRatings = {
   note7: number;
   note8: number;
   note9: number;
-};
+}
 
-export function RatingModal({ name, email, department }: EmployeeAvaliation) {
+export function RatingModal({
+  name,
+  email,
+  department,
+  setOpen,
+}: RatingModalProps) {
   const { control, handleSubmit } = useForm<InputRatings>();
-  const { ratingEmployee, closeModal } = useRating();
+  const { ratingEmployee } = useRating();
 
   const handleRating = (data: any) => {
     ratingEmployee(email, {
@@ -36,12 +46,12 @@ export function RatingModal({ name, email, department }: EmployeeAvaliation) {
       note8: Number(data.note8),
       note9: Number(data.note9),
     });
-    closeModal();
+    setOpen(false);
   };
 
   return (
     <Dialog.DialogPortal>
-      <Dialog.DialogOverlay className="bg-black/10 inset-0 fixed" />
+      <Dialog.DialogOverlay className="backdrop-blur-sm inset-0 fixed" />
       <Dialog.Content className="w-[700px] h-[95%] flex flex-col justify-between bg-white py-6 px-8 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-md shadow-black/10">
         <Dialog.DialogTitle className="w-full flex flex-row items-center justify-center text-2xl font-bold">
           Avaliação

@@ -15,11 +15,7 @@ export interface Employee {
   name: string;
   email: string;
   department: string;
-  ratings: [
-    {
-      whoVoted: string;
-    }
-  ];
+  ratings: RatingsEmployee[];
 }
 
 interface User {
@@ -27,7 +23,9 @@ interface User {
   mail: string;
 }
 
-interface RatingsEmployee {
+export interface RatingsEmployee {
+  whoVoted?: string;
+  id?: string;
   note1: number;
   note2: number;
   note3: number;
@@ -50,8 +48,6 @@ interface RatingContextData {
   searchEmployees: (employee: string) => void;
   filteredEmployees: Employee[] | [];
   ratingEmployee: (employeeEmail: string, ratings: RatingsEmployee) => void;
-  modalOpen: boolean;
-  closeModal: () => void;
   isLoading: boolean;
 }
 
@@ -62,7 +58,7 @@ export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [user, setUser] = useState<User>();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isOpen, setIslOpen] = useState(false);
 
   useEffect(() => {
     async function getEmployees() {
@@ -107,18 +103,34 @@ export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
     ratings: RatingsEmployee
   ) {
     try {
-      await api.post(`/employee/${employeeEmail}/rating`, {
+      const newRating: RatingsEmployee = {
         whoVoted: user?.mail,
         ...ratings,
-      });
-      toast.success("Avaliação Concluida!!");
+      };
+
+      const updatedEmployees = [...employees];
+      const employeeExists = updatedEmployees.find(
+        (employee) => employee.email === employeeEmail
+      );
+
+      if (employeeExists) {
+        await api
+          .post(`/employee/${employeeEmail}/rating`, {
+            ...newRating,
+          })
+          .then((res) => employeeExists?.ratings.push({ ...res.data }));
+
+        setEmployees(updatedEmployees);
+        toast.success("Avaliação Concluida!!");
+      }
+      return Error();
     } catch {
       toast.error("Falha na sua Avaliação");
     }
   }
 
   const closeModal = () => {
-    setModalOpen(!modalOpen);
+    setIsLoading(false);
   };
 
   return (
@@ -130,8 +142,6 @@ export function RatingProvider({ children }: RatingProviderProps): JSX.Element {
         filteredEmployees,
         search,
         user,
-        modalOpen,
-        closeModal,
         isLoading,
       }}
     >
