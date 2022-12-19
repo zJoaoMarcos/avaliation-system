@@ -8,6 +8,6 @@
   }
 
   .ratingButton-disable {
-    @apply w-32 md:w-36 py-1.5 px-4 sm:px-6 bg-[#4F46BB]/75 font-medium text-sm text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md;
+    @apply w-32 md:w-36 py-1.5 px-4 sm:px-6 bg-[#4F46BB]/75 font-medium text-sm text-white rounded-full gap-2 flex flex-row items-center justify-start m-4 shadow-black/25 shadow-md hover:cursor-not-allowed;
   }
 }
